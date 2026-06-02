@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model WebhookEvent {
+  id              Int      @id @default(autoincrement())
+  source          String
+  event_type      String
+  payload         String
+  signature_valid Boolean  @default(false)
+  status          String   @default("received")
+  received_at     DateTime @default(now())
+}
